@@ -13,6 +13,8 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 
+		public bool IsLocked;
+
 		[Header("Movement Settings")]
 		public bool analogMovement;
 
@@ -23,12 +25,15 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
-			MoveInput(value.Get<Vector2>());
+			if (!IsLocked)
+			{
+				MoveInput(value.Get<Vector2>());
+			}
 		}
 
 		public void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
+			if(cursorInputForLook && !IsLocked)
 			{
 				LookInput(value.Get<Vector2>());
 			}
@@ -36,12 +41,18 @@ namespace StarterAssets
 
 		public void OnJump(InputValue value)
 		{
-			JumpInput(value.isPressed);
+			if (!IsLocked)
+			{
+				JumpInput(value.isPressed);
+			}
 		}
 
 		public void OnSprint(InputValue value)
 		{
-			SprintInput(value.isPressed);
+			if (!IsLocked)
+			{
+				SprintInput(value.isPressed);
+			}
 		}
 #endif
 
