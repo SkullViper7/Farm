@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Interaction : MonoBehaviour
 {
-    [SerializeField] LayerMask _interactable;
+    [SerializeField] LayerMask _interactableLayer;
 
     public bool CanInteract;
 
@@ -15,39 +15,34 @@ public class Interaction : MonoBehaviour
     [SerializeField] GameObject _interactText;
     [SerializeField] Camera _cam;
 
+    [Header("Interactables")]
     [SerializeField] GameObject _store;
 
     public RaycastHit Hit;
 
-    PlayerInput _playerInput;
     StarterAssetsInputs _starterAssetsInputs;
 
     private void Awake()
     {
-        _playerInput = GetComponent<PlayerInput>();
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
     }
 
     void FixedUpdate()
     {
-        CanInteract = Physics.Raycast(_cam.transform.position, _cam.transform.forward, out Hit, _interactDistance, _interactable);
+        CanInteract = Physics.Raycast(_cam.transform.position, _cam.transform.forward, out Hit, _interactDistance, _interactableLayer);
         _interactText.SetActive(CanInteract);
     }
 
     public void OnInteract(InputValue value)
     {
-        if (value.isPressed)
+        if (CanInteract)
         {
-            if (CanInteract)
-            {
-                if (Hit.transform.tag == "Store")
-                {
-                    Cursor.lockState = CursorLockMode.None;
-                    _store.SetActive(true);
-                    _starterAssetsInputs.IsLocked = true;
-                }
+            if (Hit.transform.tag == "Store")
+            {                    
+                Cursor.lockState = CursorLockMode.None;
+                _store.SetActive(true);
+                _starterAssetsInputs.IsLocked = true;
             }
         }
-
     }
 }
