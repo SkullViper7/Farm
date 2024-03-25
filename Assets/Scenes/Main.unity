@@ -1031,7 +1031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactableLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   CanInteract: 0
   _interactDistance: 2
   _interactText: {fileID: 559689955}
