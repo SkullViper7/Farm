@@ -13,7 +13,7 @@ public class Interaction : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Physics.Raycast(_cam.transform.position, _cam.transform.forward, out RaycastHit hit, 3f, _interactable))
+        if (Physics.Raycast(_cam.transform.position, _cam.transform.forward, out RaycastHit hit, 10f, _interactable))
         {
             _canInteract = true;
             _interactText.SetActive(true);
