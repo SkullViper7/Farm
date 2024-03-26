@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using StarterAssets;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
     public List<Item> Items;
 
     [SerializeField] GameObject _inventory;
-    [SerializeField] GameObject _itemsUI;
     [SerializeField] GameObject _pauseMenu;
-
+    public List<GameObject> SlotList;
+    public int AvailableSlots = 6;
     public int Money;
     [SerializeField] TMP_Text _moneyText;
 
@@ -31,13 +34,14 @@ public class Inventory : MonoBehaviour
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         _moneyText.text = Money.ToString();
-        UpdateInventory();
+        CheckDuplicates();
     }
 
     public void OpenInventory()
     {
         _inventory.SetActive(true);
         _pauseMenu.SetActive(false);
+        CheckDuplicates();
     }
 
 
@@ -49,47 +53,64 @@ public class Inventory : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void UpdateInventory()
+    void CheckDuplicates()
     {
-        for (int i = 0; i < Items.Count; i++)
+        var tagGroups = Items.GroupBy(x => x.tag).ToDictionary(x => x.Key, x => x.ToList());
+
+        foreach (var tagGroup in tagGroups)
         {
-            // Get the child GameObject for the current item, and get the Item component
-            Item itemUI = _itemsUI.transform.GetChild(i).GetComponent<Item>();
+            var count = tagGroup.Value.Count;
 
-            // Set the item data for the UI to display
-            itemUI.ItemData = Items[i].ItemData;
+            if (count > 1)
+            {
+                var firstItem = tagGroup.Value.First();
+                var groupedItems = tagGroup.Value.GroupBy(x => x).Where(x => x.Count() > 1).SelectMany(x => x).ToList();
 
-            // Show/hide the item UI based on whether there are any items in the inventory
-            itemUI.gameObject.SetActive(Items.Count > 0);
+                foreach (var groupedItem in groupedItems)
+                {
+                    Items.Remove(groupedItem);
+                }
+
+                Items.Add(firstItem);
+            }
         }
 
+        UpdateInventory(tagGroups);
+    }
 
-        // iterate through all enabled items and remove duplicates
-        for (int i = 0; i < Items.Count; i++)
+    void UpdateInventory(Dictionary<string, List<Item>> tagGroups)
+    {
+        for (int i = 0; i < SlotList.Count; i++)
         {
-            // skip disabled items
-            if (!Items[i].gameObject.activeSelf)
-                continue;
+            SlotList[i].SetActive(false);
+        }
 
-            string itemTag = Items[i].tag;
-
-            // find other items with the same tag
-            List<Item> duplicates = Items.FindAll(x => x.tag == itemTag && x != Items[i]);
-
-            if (duplicates.Count > 0)
+        int index = 0;
+        foreach (var tagGroup in tagGroups)
+        {
+            if (index < SlotList.Count)
             {
-                // get the first duplicate and its count text
-                Item duplicateItem = duplicates[0];
-                TMP_Text countText = duplicateItem.transform.GetChild(1).GetComponent<TMP_Text>();
+                SlotList[index].SetActive(true);
+                SlotList[index].GetComponent<Item>().ItemData = tagGroup.Value[0].GetComponent<Item>().ItemData;
+                index++;
+            }
+        }
 
-                // increment the count of the first item and disable the duplicate
-                int.TryParse(countText.text, out int count);
-                count++;
-                countText.text = count.ToString();
-                duplicateItem.gameObject.SetActive(false);
+        index = 0;
+        foreach (var tagGroup in tagGroups)
+        {
+            if (index < SlotList.Count)
+            {
+                var slot = SlotList[index];
+                slot.GetComponent<Image>().sprite = tagGroup.Value[0].GetComponent<Item>().ItemData.Icon;
+
+                slot.transform.GetChild(1).GetComponent<TMP_Text>().text = tagGroup.Value.Count.ToString();
+
+                index++;
             }
         }
     }
+
 
     public void AddItem(Item item, int amount)
     {

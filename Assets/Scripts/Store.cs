@@ -10,6 +10,10 @@ public class Store : MonoBehaviour
     [SerializeField] GameObject _contextBox;
     [SerializeField] TMP_Text _price;
     [SerializeField] TMP_Text _moneyText;
+
+    [SerializeField] GameObject _noSlotError;
+    [SerializeField] GameObject _noMoneyError;
+
     [SerializeField] StarterAssetsInputs _starterAssetsInputs;
     [SerializeField] Inventory _inventoryScript;
 
@@ -54,8 +58,21 @@ public class Store : MonoBehaviour
 
     public void BuyItem()
     {
-        _inventoryScript.Money -= int.Parse(_price.text);
-        _contextBox.SetActive(false);
-        _inventoryScript.AddItem(_tempItem, _amountInt);
+        if (_amountInt <= _inventoryScript.AvailableSlots && _inventoryScript.Money >= int.Parse(_price.text))
+        {
+            _inventoryScript.Money -= int.Parse(_price.text);
+            _contextBox.SetActive(false);
+            _inventoryScript.AddItem(_tempItem, _amountInt);
+        }
+
+        if (_amountInt > _inventoryScript.AvailableSlots)
+        {
+            _noSlotError.SetActive(true);
+        }
+
+        if (_inventoryScript.Money < int.Parse(_price.text))
+        {
+            _noMoneyError.SetActive(true);
+        }
     }
 }

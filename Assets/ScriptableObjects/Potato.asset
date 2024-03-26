@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c21086509a1b1824eb341668d2340f2f, type: 3}
-  m_Name: Seed
+  m_Name: Potato
   m_EditorClassIdentifier: 
-  Name: Corn
-  Icon: {fileID: 21300000, guid: 9c3e5587071ceb4478265f9297fb685d, type: 3}
-  Price: 1
-  Description: Seed
-  Type: Seed
+  Name: Potato
+  Icon: {fileID: 21300000, guid: f9a4d6d09114535449d2750041684b0a, type: 3}
+  Price: 2
