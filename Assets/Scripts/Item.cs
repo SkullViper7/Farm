@@ -16,16 +16,16 @@ public class Item : MonoBehaviour
 
     TMP_Text _text;
 
-    [SerializeField] ItemSO _itemData;
+    public ItemSO ItemData;
 
-    private void Awake()
+    private void Start()
     {
         _sprite = GetComponent<Image>();
         _text = GetComponentInChildren<TMP_Text>();
 
-        _name = _itemData.Name;
-        _icon = _itemData.Icon;
-        Price = _itemData.Price;
+        _name = ItemData.Name;
+        _icon = ItemData.Icon;
+        Price = ItemData.Price;
 
         _sprite.sprite = _icon;
         _text.text = _name;

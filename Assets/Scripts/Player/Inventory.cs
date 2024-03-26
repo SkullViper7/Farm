@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using StarterAssets;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,16 +13,14 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject _itemsUI;
     [SerializeField] GameObject _pauseMenu;
 
+    public int Money;
+    [SerializeField] TMP_Text _moneyText;
+
     StarterAssetsInputs _starterAssetsInputs;
 
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
-    }
-
-    private void Start()
-    {
-        AddItemsToInventory();
     }
 
     public void OnInventory(InputValue value)
@@ -31,6 +30,8 @@ public class Inventory : MonoBehaviour
         _starterAssetsInputs.IsLocked = true;
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
+        _moneyText.text = Money.ToString();
+        UpdateInventory();
     }
 
     public void OpenInventory()
@@ -48,15 +49,17 @@ public class Inventory : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-
-    private void AddItemsToInventory()
+    void UpdateInventory()
     {
-        Items = new List<Item>();
-        Item[] items = Resources.LoadAll<Item>("Items");
-
-        foreach (Item item in items)
+        for (int i = 0; i < Items.Count; i++)
         {
-            Items.Add(item);
+            _itemsUI.transform.GetChild(i).GetComponent<Item>().ItemData = Items[i].ItemData;
+            _itemsUI.transform.GetChild(i).gameObject.SetActive(Items.Count > 0);
         }
+    }
+
+    public void AddItem(Item item)
+    {
+        Items.Add(item);
     }
 }
