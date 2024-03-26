@@ -23,6 +23,8 @@ public class Store : MonoBehaviour
 
     public void ItemChoose(Item item)
     {
+        _amountInt = 1;
+        _amount.text = _amountInt.ToString();
         _contextBox.SetActive(true);
         _price.text = item.Price.ToString();
         _moneyText.text = _inventoryScript.Money.ToString();
