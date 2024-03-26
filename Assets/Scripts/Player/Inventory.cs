@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     public List<Item> Items;
 
     [SerializeField] GameObject _inventory;
+    [SerializeField] GameObject _itemsUI;
     [SerializeField] GameObject _pauseMenu;
 
     StarterAssetsInputs _starterAssetsInputs;
@@ -16,6 +17,11 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
+    }
+
+    private void Start()
+    {
+        AddItemsToInventory();
     }
 
     public void OnInventory(InputValue value)
@@ -40,5 +46,17 @@ public class Inventory : MonoBehaviour
         _starterAssetsInputs.IsLocked = false;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+
+    private void AddItemsToInventory()
+    {
+        Items = new List<Item>();
+        Item[] items = Resources.LoadAll<Item>("Items");
+
+        foreach (Item item in items)
+        {
+            Items.Add(item);
+        }
     }
 }
