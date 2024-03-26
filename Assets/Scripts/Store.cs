@@ -14,7 +14,7 @@ public class Store : MonoBehaviour
     [SerializeField] Inventory _inventoryScript;
 
     [SerializeField] TMP_Text _amount;
-
+    int _amountInt = 1;
     Item _tempItem;
 
     public void ItemChoose(Item item)
@@ -28,6 +28,7 @@ public class Store : MonoBehaviour
     public void IncreaseAmount()
     {
         _amount.text = (int.Parse(_amount.text) + 1).ToString();
+        _amountInt++;
     }
 
     public void DecreaseAmount()
@@ -35,6 +36,7 @@ public class Store : MonoBehaviour
         if (int.Parse(_amount.text) > 1)
         {
             _amount.text = (int.Parse(_amount.text) - 1).ToString();
+            _amountInt--;
         }
     }
 
@@ -54,6 +56,6 @@ public class Store : MonoBehaviour
     {
         _inventoryScript.Money -= int.Parse(_price.text);
         _contextBox.SetActive(false);
-        _inventoryScript.AddItem(_tempItem);
+        _inventoryScript.AddItem(_tempItem, _amountInt);
     }
 }
