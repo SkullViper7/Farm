@@ -61,6 +61,14 @@ public class Interaction : MonoBehaviour
                 _inventoryScript.OpenInventory();
                 _starterAssetsInputs.IsLocked = true;
             }
+
+            if (Hit.transform.tag == "Grabbable")
+            {
+                _inventoryScript.AddItem(Hit.transform.GetComponent<Item>(), 1);
+                Hit.transform.GetComponent<Slot>().Unlock();
+                Hit.transform.tag = "Plantation";
+                Destroy(Hit.transform.GetComponentInChildren<Plant>().gameObject);
+            }
         }
     }
 

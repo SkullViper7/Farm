@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 1899702463536805360}
   - component: {fileID: 6693559089866746736}
   - component: {fileID: 349456007102171598}
+  - component: {fileID: -2359116383283304869}
   m_Layer: 0
   m_Name: Corn
   m_TagString: Untagged
@@ -372,7 +373,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slider: {fileID: 651666000765813579}
-  _growthTime: 5
+  _sliderObject: {fileID: 9166476756640917805}
+  _growthTime: 1
+--- !u!114 &-2359116383283304869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7247591996349086700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ad3d4005fa6e44ab4d47ff3efa249c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Price: 0
+  ItemData: {fileID: 11400000, guid: 1a8cea8cb1ed5ff4f8a3db10ee91481d, type: 2}
+  Tag: 
 --- !u!1 &7295188213829779105
 GameObject:
   m_ObjectHideFlags: 0

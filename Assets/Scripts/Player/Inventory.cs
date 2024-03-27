@@ -138,7 +138,5 @@ public class Inventory : MonoBehaviour
             Items.Remove(item);
             item.transform.gameObject.SetActive(false);
         }
-
-        CheckDuplicates();
     }
 }

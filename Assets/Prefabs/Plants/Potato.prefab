@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7929719306113336174}
   - component: {fileID: 1691680365886983464}
   - component: {fileID: 8979605127089664391}
+  - component: {fileID: -6634750581310139913}
   m_Layer: 0
   m_Name: Potato
   m_TagString: Untagged
@@ -105,3 +106,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6634750581310139913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4444031052089139676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ad3d4005fa6e44ab4d47ff3efa249c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Price: 0
+  ItemData: {fileID: 11400000, guid: b8f1dad58f3532e489a0412be3b87c2c, type: 2}
+  Tag: 

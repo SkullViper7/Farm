@@ -9,6 +9,9 @@ TagManager:
   - Corn
   - Potato
   - Plantation
+  - Selling
+  - Grabbable
+  - InventorySlot
   layers:
   - Default
   - TransparentFX

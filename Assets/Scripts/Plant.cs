@@ -6,10 +6,14 @@ using UnityEngine.UI;
 public class Plant : MonoBehaviour
 {
     [SerializeField] Slider _slider;
+    [SerializeField] GameObject _sliderObject;
     [SerializeField] float _growthTime;
+
+    Slot _slotScript;
 
     void Start()
     {
+        _slotScript = GetComponentInParent<Slot>();
         _slider.value = 0;
         StartCoroutine(Grow());
     }
@@ -22,5 +26,9 @@ public class Plant : MonoBehaviour
             _slider.value += increment * Time.deltaTime;
             yield return null;
         }
+
+        _slotScript.Unlock();
+        _sliderObject.SetActive(false);
+        _slotScript.gameObject.tag = "Grabbable";
     }
 }

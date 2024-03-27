@@ -29,9 +29,11 @@ public class Item : MonoBehaviour
         _icon = ItemData.Icon;
         Price = ItemData.Price;
 
-        _sprite.sprite = _icon;
-        _text.text = _name;
-
-        Tag = gameObject.tag;
+        if (gameObject.tag == "InventorySlot" || gameObject.tag == "Corn" || gameObject.tag == "Potato")
+        {
+            _sprite.sprite = _icon;
+            _text.text = _name;
+            Tag = gameObject.tag;
+        }
     }
 }
