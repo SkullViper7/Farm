@@ -21,6 +21,8 @@ public class Inventory : MonoBehaviour
 
     StarterAssetsInputs _starterAssetsInputs;
 
+    GameObject _slot;
+
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
@@ -56,6 +58,7 @@ public class Inventory : MonoBehaviour
     void CheckDuplicates()
     {
         var tagGroups = Items.GroupBy(x => x.tag).ToDictionary(x => x.Key, x => x.ToList());
+        var tempItems = new List<Item>(Items);
 
         foreach (var tagGroup in tagGroups)
         {
@@ -68,10 +71,10 @@ public class Inventory : MonoBehaviour
 
                 foreach (var groupedItem in groupedItems)
                 {
-                    Items.Remove(groupedItem);
+                    tempItems.Remove(groupedItem);
                 }
 
-                Items.Add(firstItem);
+                tempItems.Add(firstItem);
             }
         }
 
@@ -101,10 +104,11 @@ public class Inventory : MonoBehaviour
         {
             if (index < SlotList.Count)
             {
-                var slot = SlotList[index];
-                slot.GetComponent<Image>().sprite = tagGroup.Value[0].GetComponent<Item>().ItemData.Icon;
+                _slot = SlotList[index];
+                _slot.GetComponent<Image>().sprite = tagGroup.Value[0].GetComponent<Item>().ItemData.Icon;
+                _slot.GetComponent<Item>().Tag = tagGroup.Key;
 
-                slot.transform.GetChild(1).GetComponent<TMP_Text>().text = tagGroup.Value.Count.ToString();
+                _slot.transform.GetChild(1).GetComponent<TMP_Text>().text = tagGroup.Value.Count.ToString();
 
                 index++;
             }
@@ -118,5 +122,23 @@ public class Inventory : MonoBehaviour
         {
             Items.Add(item);
         }
+    }
+
+    public void RemoveItem(Item item)
+    {
+        int count;
+        int.TryParse(item.transform.GetChild(1).GetComponent<TMP_Text>().text, out count);
+        if (count > 1)
+        {
+            item.transform.GetChild(1).GetComponent<TMP_Text>().text = (count - 1).ToString();
+            Items.Remove(item);
+        }
+        else
+        {
+            Items.Remove(item);
+            item.transform.gameObject.SetActive(false);
+        }
+
+        CheckDuplicates();
     }
 }

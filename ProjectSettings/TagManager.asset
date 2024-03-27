@@ -8,6 +8,7 @@ TagManager:
   - Store
   - Corn
   - Potato
+  - Plantation
   layers:
   - Default
   - TransparentFX

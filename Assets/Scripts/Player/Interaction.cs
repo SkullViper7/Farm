@@ -21,10 +21,12 @@ public class Interaction : MonoBehaviour
     public RaycastHit Hit;
 
     StarterAssetsInputs _starterAssetsInputs;
+    Inventory _inventoryScript;
 
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
+        _inventoryScript = GetComponent<Inventory>();
     }
 
     void FixedUpdate()
@@ -33,16 +35,33 @@ public class Interaction : MonoBehaviour
         _interactText.SetActive(CanInteract);
     }
 
+    /// <summary>
+    /// Handles player interaction with interactables.
+    /// </summary>
+    /// <param name="value">Input value from InputSystem</param>
     public void OnInteract(InputValue value)
     {
+        // If player is looking at interactable
         if (CanInteract)
         {
+            // If interactable is store
             if (Hit.transform.tag == "Store")
-            {                    
+            {
+                // Unlock cursor and open the store
                 Cursor.lockState = CursorLockMode.None;
                 _store.SetActive(true);
+
+                // Disable player input and lock cursor
+                _starterAssetsInputs.IsLocked = true;
+            }
+
+            if (Hit.transform.tag == "Plantation")
+            {
+                Cursor.lockState = CursorLockMode.None;
+                _inventoryScript.OpenInventory();
                 _starterAssetsInputs.IsLocked = true;
             }
         }
     }
+
 }

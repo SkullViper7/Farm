@@ -18,6 +18,8 @@ public class Item : MonoBehaviour
 
     public ItemSO ItemData;
 
+    public string Tag;
+
     private void Start()
     {
         _sprite = GetComponent<Image>();
@@ -29,5 +31,7 @@ public class Item : MonoBehaviour
 
         _sprite.sprite = _icon;
         _text.text = _name;
+
+        Tag = gameObject.tag;
     }
 }
