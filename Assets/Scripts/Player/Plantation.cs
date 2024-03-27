@@ -23,7 +23,7 @@ public class Plantation : MonoBehaviour
         var plantTransform = _interactionScript.Hit.transform;
         var plantPrefab = item.Tag == "Corn" ? _corn : _potato;
 
-        Instantiate(plantPrefab, plantTransform.position, Quaternion.identity);
+        Instantiate(plantPrefab, plantTransform.position - new Vector3(0, 0.5f, 0), Quaternion.identity);
 
         _inventoryScript.CloseInventory();
         _interactionScript.Hit.transform.GetComponent<Slot>().Lock();
