@@ -34,12 +34,17 @@ public class Item : MonoBehaviour
         Price = ItemData.Price;
         Value = ItemData.Value;
 
-        ID = Random.Range(0, 10000);
+        if (!ItemInteract.Instance.IDCreated)
+        {
+            ID = Random.Range(0, 10000);
+            ItemInteract.Instance.IDCreated = true;
+        }
 
         _sprite.sprite = _icon;
         _text.text = _name;
         Tag = gameObject.tag;
 
         GetComponent<Button>().onClick.AddListener(delegate{ItemInteract.Instance.Click(gameObject);});
+        Debug.Log($"instantiated {ID}");
     }
 }

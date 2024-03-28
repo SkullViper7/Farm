@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -912,6 +912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
+  _inventoryScript: {fileID: 429025537}
 --- !u!1 &120504370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,6 +1219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
+  _inventoryScript: {fileID: 429025537}
 --- !u!1 &273137717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,6 +1995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
+  _inventoryScript: {fileID: 429025537}
 --- !u!1 &429025522 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
@@ -2075,6 +2078,7 @@ MonoBehaviour:
   AvailableSlots: 6
   Money: 10
   _moneyText: {fileID: 1928628550}
+  IsOpen: 0
 --- !u!114 &429025543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4515,6 +4519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
+  _inventoryScript: {fileID: 429025537}
 --- !u!1 &898156171
 GameObject:
   m_ObjectHideFlags: 0
@@ -4583,6 +4588,7 @@ MonoBehaviour:
   _inventoryScript: {fileID: 429025537}
   _plantationScript: {fileID: 429025543}
   _sellingScript: {fileID: 429025544}
+  IDCreated: 0
   IsPlanting: 0
   IsSelling: 0
 --- !u!4 &1026223261
@@ -6278,6 +6284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
+  _inventoryScript: {fileID: 429025537}
 --- !u!1 &1488243967
 GameObject:
   m_ObjectHideFlags: 0
@@ -6508,6 +6515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
+  _inventoryScript: {fileID: 429025537}
 --- !u!1 &1521355719
 GameObject:
   m_ObjectHideFlags: 0

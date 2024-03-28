@@ -24,6 +24,8 @@ public class Inventory : MonoBehaviour
 
     StarterAssetsInputs _starterAssetsInputs;
 
+    public bool IsOpen;
+
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
@@ -54,13 +56,15 @@ public class Inventory : MonoBehaviour
         // Update the money text on the inventory
         _moneyText.text = Money.ToString();
 
-        // Check for duplicate items in the inventory
+        IsOpen = true;
     }
 
     public void OpenInventory()
     {
         _inventory.SetActive(true);
         _pauseMenu.SetActive(false);
+
+        IsOpen = true;
     }
 
 
@@ -70,31 +74,40 @@ public class Inventory : MonoBehaviour
         _starterAssetsInputs.IsLocked = false;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
+
+        IsOpen = false;
     }
 
     public void UpdateInventory()
     {
-        foreach (GameObject slot in SlotList)
+        // First find out which slots already have an item in them
+        List<int> filledSlots = new List<int>();
+        for (int i = 0; i < SlotList.Count; i++)
         {
-            if (slot.transform.childCount > 0)
+            if (SlotList[i].transform.childCount > 0)
             {
-                Destroy(slot.transform.GetChild(0).gameObject);
+                filledSlots.Add(i);
             }
         }
 
+        // Then only instantiate items that are not already instantiated
         Items = Items.OrderBy(x => x.GetComponent<Item>().ItemData.Name).ToList();
-
         for (int i = 0; i < Items.Select(x => x.GetComponent<Item>().ItemData).Distinct().OrderBy(x => x.Name).Count(); i++)
         {
             int count = Items.Count(x => x.GetComponent<Item>().ItemData == Items[i].GetComponent<Item>().ItemData);
-            GameObject item = Instantiate(Items[i], GetFirstAvailableSlot().transform);
-            item.transform.GetChild(1).GetComponent<TMP_Text>().text = count.ToString();
+            if (!filledSlots.Contains(i))
+            {
+                GameObject item = Instantiate(Items[i], GetFirstAvailableSlot().transform);
+                item.transform.GetChild(1).GetComponent<TMP_Text>().text = count.ToString();
+            }
         }
+
+        Debug.Log($"sorted {Items[0].GetComponent<Item>().ID}");
     }
 
     public void AddItem(GameObject item, int amount)
     {
-        for (int i = 1; i < amount + 1; i++)
+        for (int i = 0; i < amount; i++)
         {
             Items.Add(item);
         }
@@ -104,7 +117,8 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(GameObject item, int amount)
     {
-        for (int i = 1; i < amount + 1; i++)
+        Debug.Log($"removed {Items[0].GetComponent<Item>().ID}");
+        for (int i = 0; i < amount; i++)
         {
             Debug.Log(Items.Contains(item));
             Items.Remove(item);

@@ -92,5 +92,6 @@ public class Store : MonoBehaviour
         {
             _noMoneyError.SetActive(true);
         }
+        Debug.Log($"bought {_inventoryScript.Items[0].GetComponent<Item>().ID}");
     }
 }

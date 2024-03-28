@@ -28,6 +28,8 @@ public class ItemInteract : MonoBehaviour
     [SerializeField] Plantation _plantationScript;
     [SerializeField] Selling _sellingScript;
 
+    public bool IDCreated;
+
     public bool IsPlanting;
     public bool IsSelling;
 
@@ -40,6 +42,7 @@ public class ItemInteract : MonoBehaviour
 
         if (item.transform.parent.tag == "InventorySlot" && IsPlanting)
         {
+            Debug.Log($"clicked {_inventoryScript.Items[0].GetComponent<Item>().ID}");
             _plantationScript.PlantItem(item);
         }
 

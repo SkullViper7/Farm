@@ -9,6 +9,8 @@ public class Slot : MonoBehaviour
     [SerializeField] Material _locked;
     MeshRenderer _meshRenderer;
 
+    [SerializeField] Inventory _inventoryScript;
+
     void Awake()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
@@ -16,7 +18,10 @@ public class Slot : MonoBehaviour
 
     void OnMouseOver()
     {
-        _meshRenderer.enabled = true;
+        if (!_inventoryScript.IsOpen)
+        {
+            _meshRenderer.enabled = true;
+        }
     }
 
     void OnMouseExit()

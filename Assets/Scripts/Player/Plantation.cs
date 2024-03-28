@@ -23,6 +23,8 @@ public class Plantation : MonoBehaviour
 
     public void PlantItem(GameObject item)
     {
+        Debug.Log($"planted {item.GetComponent<Item>().ID}");
+
         Transform plantTransform = _interactionScript.Hit.transform;
 
         GameObject newPlant;
