@@ -6,12 +6,12 @@ TagManager:
   tags:
   - CinemachineTarget
   - Store
-  - Corn
-  - Potato
   - Plantation
   - Selling
   - Grabbable
   - InventorySlot
+  - Mushroom
+  - Canabis
   layers:
   - Default
   - TransparentFX

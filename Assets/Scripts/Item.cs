@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
     Sprite _icon;
 
     [HideInInspector] public int Price;
+    [HideInInspector] public int Value;
 
     Image _sprite;
 
@@ -26,10 +27,12 @@ public class Item : MonoBehaviour
         _text = GetComponentInChildren<TMP_Text>();
 
         _name = ItemData.Name;
+        gameObject.name = _name;
         _icon = ItemData.Icon;
         Price = ItemData.Price;
+        Value = ItemData.Value;
 
-        if (gameObject.tag == "InventorySlot" || gameObject.tag == "Corn" || gameObject.tag == "Potato")
+        if (gameObject.tag == "InventorySlot" || gameObject.tag == "Canabis" || gameObject.tag == "Mushroom")
         {
             _sprite.sprite = _icon;
             _text.text = _name;

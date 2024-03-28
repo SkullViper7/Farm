@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c21086509a1b1824eb341668d2340f2f, type: 3}
-  m_Name: Potato
+  m_Name: Canabis
   m_EditorClassIdentifier: 
-  Name: Potato
-  Icon: {fileID: 21300000, guid: f9a4d6d09114535449d2750041684b0a, type: 3}
-  Price: 2
+  Name: Canabis
+  Icon: {fileID: 21300000, guid: e5951b623b38f724aba1617011e59074, type: 3}
+  Price: 0
+  Value: 10

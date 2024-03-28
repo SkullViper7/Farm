@@ -22,11 +22,14 @@ public class Interaction : MonoBehaviour
 
     StarterAssetsInputs _starterAssetsInputs;
     Inventory _inventoryScript;
+    Selling _sellingScript;
+    Plantation _plantationScript;
 
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         _inventoryScript = GetComponent<Inventory>();
+        _sellingScript = GetComponent<Selling>();
     }
 
     void FixedUpdate()
@@ -59,6 +62,7 @@ public class Interaction : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.None;
                 _inventoryScript.OpenInventory();
+                //_plantationScript.ChangeClick();
                 _starterAssetsInputs.IsLocked = true;
             }
 
@@ -68,6 +72,14 @@ public class Interaction : MonoBehaviour
                 Hit.transform.GetComponent<Slot>().Unlock();
                 Hit.transform.tag = "Plantation";
                 Destroy(Hit.transform.GetComponentInChildren<Plant>().gameObject);
+            }
+
+            if (Hit.transform.tag == "Selling")
+            {
+                _inventoryScript.OpenInventory();
+                //_sellingScript.ChangeOnClick();
+                Cursor.lockState = CursorLockMode.None;
+                _starterAssetsInputs.IsLocked = true;
             }
         }
     }

@@ -55,7 +55,7 @@ public class Inventory : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void CheckDuplicates()
+    public void CheckDuplicates()
     {
         var tagGroups = Items.GroupBy(x => x.tag).ToDictionary(x => x.Key, x => x.ToList());
         var tempItems = new List<Item>(Items);
@@ -124,19 +124,21 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void RemoveItem(Item item)
+    public void RemoveItem(Item item, int amount)
     {
         int count;
         int.TryParse(item.transform.GetChild(1).GetComponent<TMP_Text>().text, out count);
-        if (count > 1)
+        if (count <= amount)
         {
-            item.transform.GetChild(1).GetComponent<TMP_Text>().text = (count - 1).ToString();
-            Items.Remove(item);
+            item.transform.gameObject.SetActive(false);
         }
         else
         {
+            item.transform.GetChild(1).GetComponent<TMP_Text>().text = (count - amount).ToString();
+        }
+        for (int i = 0; i < amount; i++)
+        {
             Items.Remove(item);
-            item.transform.gameObject.SetActive(false);
         }
     }
 }

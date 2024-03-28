@@ -10,4 +10,6 @@ public class ItemSO : ScriptableObject
     public Sprite Icon;
 
     public int Price;
+
+    public int Value;
 }
