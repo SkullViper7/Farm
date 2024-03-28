@@ -10,40 +10,57 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public List<Item> Items;
+    public List<GameObject> Items;
 
     [SerializeField] GameObject _inventory;
     [SerializeField] GameObject _pauseMenu;
     public List<GameObject> SlotList;
+
+    [SerializeField] GameObject _itemPrefab;
+
     public int AvailableSlots = 6;
     public int Money;
     [SerializeField] TMP_Text _moneyText;
 
     StarterAssetsInputs _starterAssetsInputs;
 
-    GameObject _slot;
-
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
     }
 
+    /// <summary>
+    /// Opens the inventory when the inventory button is pressed
+    /// </summary>
+    /// <param name="value">InputValue from the button being pressed</param>
     public void OnInventory(InputValue value)
     {
+        // Show the inventory and pause menu
         _inventory.SetActive(true);
         _pauseMenu.SetActive(false);
+
+        // Lock the player's movements
         _starterAssetsInputs.IsLocked = true;
+
+        ItemInteract.Instance.IsPlanting = false;
+        ItemInteract.Instance.IsSelling = false;
+
+        // Pause the game
         Time.timeScale = 0;
+
+        // Show the cursor
         Cursor.lockState = CursorLockMode.None;
+
+        // Update the money text on the inventory
         _moneyText.text = Money.ToString();
-        CheckDuplicates();
+
+        // Check for duplicate items in the inventory
     }
 
     public void OpenInventory()
     {
         _inventory.SetActive(true);
         _pauseMenu.SetActive(false);
-        CheckDuplicates();
     }
 
 
@@ -55,90 +72,57 @@ public class Inventory : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void CheckDuplicates()
+    public void UpdateInventory()
     {
-        var tagGroups = Items.GroupBy(x => x.tag).ToDictionary(x => x.Key, x => x.ToList());
-        var tempItems = new List<Item>(Items);
-
-        foreach (var tagGroup in tagGroups)
+        foreach (GameObject slot in SlotList)
         {
-            var count = tagGroup.Value.Count;
-
-            if (count > 1)
+            if (slot.transform.childCount > 0)
             {
-                var firstItem = tagGroup.Value.First();
-                var groupedItems = tagGroup.Value.GroupBy(x => x).Where(x => x.Count() > 1).SelectMany(x => x).ToList();
-
-                foreach (var groupedItem in groupedItems)
-                {
-                    tempItems.Remove(groupedItem);
-                }
-
-                tempItems.Add(firstItem);
+                Destroy(slot.transform.GetChild(0).gameObject);
             }
         }
 
-        UpdateInventory(tagGroups);
-    }
+        Items = Items.OrderBy(x => x.GetComponent<Item>().ItemData.Name).ToList();
 
-    void UpdateInventory(Dictionary<string, List<Item>> tagGroups)
-    {
-        for (int i = 0; i < SlotList.Count; i++)
+        for (int i = 0; i < Items.Select(x => x.GetComponent<Item>().ItemData).Distinct().OrderBy(x => x.Name).Count(); i++)
         {
-            SlotList[i].SetActive(false);
-        }
-
-        int index = 0;
-        foreach (var tagGroup in tagGroups)
-        {
-            if (index < SlotList.Count)
-            {
-                SlotList[index].SetActive(true);
-                SlotList[index].GetComponent<Item>().ItemData = tagGroup.Value[0].GetComponent<Item>().ItemData;
-                index++;
-            }
-        }
-
-        index = 0;
-        foreach (var tagGroup in tagGroups)
-        {
-            if (index < SlotList.Count)
-            {
-                _slot = SlotList[index];
-                _slot.GetComponent<Image>().sprite = tagGroup.Value[0].GetComponent<Item>().ItemData.Icon;
-                _slot.GetComponent<Item>().Tag = tagGroup.Key;
-
-                _slot.transform.GetChild(1).GetComponent<TMP_Text>().text = tagGroup.Value.Count.ToString();
-
-                index++;
-            }
+            int count = Items.Count(x => x.GetComponent<Item>().ItemData == Items[i].GetComponent<Item>().ItemData);
+            GameObject item = Instantiate(Items[i], GetFirstAvailableSlot().transform);
+            item.transform.GetChild(1).GetComponent<TMP_Text>().text = count.ToString();
         }
     }
 
-
-    public void AddItem(Item item, int amount)
+    public void AddItem(GameObject item, int amount)
     {
         for (int i = 1; i < amount + 1; i++)
         {
             Items.Add(item);
         }
+
+        UpdateInventory();
     }
 
-    public void RemoveItem(Item item, int amount)
+    public void RemoveItem(GameObject item, int amount)
     {
-        int count;
-        int.TryParse(item.transform.GetChild(1).GetComponent<TMP_Text>().text, out count);
-        if (count <= amount)
+        for (int i = 1; i < amount + 1; i++)
         {
-            item.transform.gameObject.SetActive(false);
-        }
-        else
-        {
-            item.transform.GetChild(1).GetComponent<TMP_Text>().text = (count - amount).ToString();
-        }
-        for (int i = 0; i < amount; i++)
-        {
+            Debug.Log(Items.Contains(item));
             Items.Remove(item);
         }
+
+        UpdateInventory();
+    }
+
+
+    public GameObject GetFirstAvailableSlot()
+    {
+        for (int i = 0; i < SlotList.Count; i++)
+        {
+            if (SlotList[i].transform.childCount == 0)
+            {
+                return SlotList[i].gameObject;
+            }
+        }
+        return null;
     }
 }

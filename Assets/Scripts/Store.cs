@@ -17,16 +17,32 @@ public class Store : MonoBehaviour
     [SerializeField] StarterAssetsInputs _starterAssetsInputs;
     [SerializeField] Inventory _inventoryScript;
 
+    [SerializeField] List<GameObject> _slots;
+
+    [SerializeField] GameObject _itemPrefab;
+
+    [SerializeField] ItemSO _canabisSO;
+    [SerializeField] ItemSO _mushroomSO;
+
     [SerializeField] TMP_Text _amount;
     int _amountInt = 1;
-    Item _tempItem;
+    GameObject _tempItem;
 
-    public void ItemChoose(Item item)
+    void Start()
+    {
+        GameObject canabis = Instantiate(_itemPrefab, _slots[0].transform);
+        GameObject mushroom = Instantiate(_itemPrefab, _slots[1].transform);
+
+        canabis.GetComponent<Item>().ItemData = _canabisSO;
+        mushroom.GetComponent<Item>().ItemData = _mushroomSO;
+    }
+
+    public void ItemChoose(GameObject item)
     {
         _amountInt = 1;
         _amount.text = _amountInt.ToString();
         _contextBox.SetActive(true);
-        _price.text = item.Price.ToString();
+        _price.text = item.GetComponent<Item>().Price.ToString();
         _moneyText.text = _inventoryScript.Money.ToString();
         _tempItem = item;
     }

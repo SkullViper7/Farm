@@ -16,21 +16,11 @@ public class Selling : MonoBehaviour
     [SerializeField] TMP_Text _value;
     int _amountInt = 1;
 
-    Item _tempItem;
+    GameObject _tempItem;
 
     private void Awake()
     {
         _inventoryScript = GetComponent<Inventory>();
-    }
-
-    public void ChangeOnClick()
-    {
-        for (int i = 0; i < _slots.Count; i++)
-        {
-            Button slot = _slots[i];
-            slot.onClick.RemoveAllListeners();
-            slot.onClick.AddListener(() => ShowContextBox(slot.GetComponent<Item>()));
-        }
     }
     
     public void IncreaseAmount()
@@ -48,21 +38,21 @@ public class Selling : MonoBehaviour
         }
     }
 
-    public void ShowContextBox(Item item)
+    public void ShowContextBox(GameObject item)
     {
         _contextBox.SetActive(true);
         _amountInt = 1;
         _amount.text = _amountInt.ToString();
-        _value.text = item.Value.ToString();
+        _value.text = item.GetComponent<Item>().Value.ToString();
         _tempItem = item;
     }
 
     public void SellItem()
     {
         _inventoryScript.RemoveItem(_tempItem, _amountInt);
-        _inventoryScript.Money += _tempItem.Value;
+        _inventoryScript.Money += _tempItem.GetComponent<Item>().Value;
         _contextBox.SetActive(false);
-        _inventoryScript.CheckDuplicates();
+        _inventoryScript.UpdateInventory();
     }
 
     public void CancelSell()

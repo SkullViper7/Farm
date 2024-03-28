@@ -460,6 +460,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canabis
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0074e68cd7b97c74ba81c518b85d9ce2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canabis
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -472,10 +477,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4189673114785762887}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0074e68cd7b97c74ba81c518b85d9ce2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -2485914561988458333}
   m_SourcePrefab: {fileID: 100100000, guid: 0074e68cd7b97c74ba81c518b85d9ce2, type: 3}
 --- !u!1 &6153872129101081996 stripped
 GameObject:
@@ -498,22 +499,6 @@ MonoBehaviour:
   _slider: {fileID: 5061975628707956313}
   _sliderObject: {fileID: 2697012027961687986}
   _growthTime: 1
---- !u!114 &-2485914561988458333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6153872129101081996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ad3d4005fa6e44ab4d47ff3efa249c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Price: 0
-  Value: 0
-  ItemData: {fileID: 11400000, guid: 1a8cea8cb1ed5ff4f8a3db10ee91481d, type: 2}
-  Tag: 
 --- !u!4 &6786118371391797046 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0074e68cd7b97c74ba81c518b85d9ce2,

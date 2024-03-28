@@ -7,7 +7,7 @@ public class Plantation : MonoBehaviour
 {
     [Header("Plants")]
     [SerializeField] GameObject _canabis;
-    [SerializeField] GameObject _msuhroom;
+    [SerializeField] GameObject _mushroom;
 
     [SerializeField] List<Button> _slots;
 
@@ -21,27 +21,18 @@ public class Plantation : MonoBehaviour
         _inventoryScript = GetComponent<Inventory>();
     }
 
-    public void ChangeClick()
+    public void PlantItem(GameObject item)
     {
-        foreach (var slot in _slots)
-        {
-            slot.onClick.RemoveAllListeners();
-            slot.onClick.AddListener(delegate{PlantItem(slot.GetComponent<Item>());});
-        }
-    }
-
-    public void PlantItem(Item item)
-    {
-        var plantTransform = _interactionScript.Hit.transform;
+        Transform plantTransform = _interactionScript.Hit.transform;
 
         GameObject newPlant;
-        if (item.name == "Canabis")
+        if (item.GetComponent<Item>().ItemData.Name == "Canabis Seed")
         {
             newPlant = Instantiate(_canabis, plantTransform.position - new Vector3(0, 0.5f, 0), Quaternion.identity);
         }
-        else if (item.name == "Mushroom")
+        else if (item.GetComponent<Item>().ItemData.Name == "Mushroom Seed")
         {
-            newPlant = Instantiate(_msuhroom, plantTransform.position - new Vector3(0, 0.5f, 0), Quaternion.identity);
+            newPlant = Instantiate(_mushroom, plantTransform.position - new Vector3(0, 0.5f, 0), Quaternion.identity);
         }
         else
         {

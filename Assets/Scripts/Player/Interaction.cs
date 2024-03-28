@@ -22,14 +22,14 @@ public class Interaction : MonoBehaviour
 
     StarterAssetsInputs _starterAssetsInputs;
     Inventory _inventoryScript;
-    Selling _sellingScript;
-    Plantation _plantationScript;
+    [SerializeField] GameObject _itemPrefab;
+    [SerializeField] ItemSO _canabisSO;
+    [SerializeField] ItemSO _mushroomSO;
 
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         _inventoryScript = GetComponent<Inventory>();
-        _sellingScript = GetComponent<Selling>();
     }
 
     void FixedUpdate()
@@ -62,13 +62,25 @@ public class Interaction : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.None;
                 _inventoryScript.OpenInventory();
-                //_plantationScript.ChangeClick();
                 _starterAssetsInputs.IsLocked = true;
+                ItemInteract.Instance.IsPlanting = true;
             }
 
             if (Hit.transform.tag == "Grabbable")
             {
-                _inventoryScript.AddItem(Hit.transform.GetComponent<Item>(), 1);
+                GameObject item = Instantiate(_itemPrefab, _inventoryScript.GetFirstAvailableSlot().transform);
+                _inventoryScript.AddItem(item, 1);
+
+                if (Hit.transform.GetChild(0).tag == "Canabis")
+                {
+                    item.GetComponent<Item>().ItemData = _canabisSO;
+                }
+
+                if (Hit.transform.GetChild(0).tag == "Mushroom")
+                {
+                    item.GetComponent<Item>().ItemData = _mushroomSO;
+                }
+
                 Hit.transform.GetComponent<Slot>().Unlock();
                 Hit.transform.tag = "Plantation";
                 Destroy(Hit.transform.GetComponentInChildren<Plant>().gameObject);
@@ -77,11 +89,10 @@ public class Interaction : MonoBehaviour
             if (Hit.transform.tag == "Selling")
             {
                 _inventoryScript.OpenInventory();
-                //_sellingScript.ChangeOnClick();
                 Cursor.lockState = CursorLockMode.None;
                 _starterAssetsInputs.IsLocked = true;
+                ItemInteract.Instance.IsSelling = true;
             }
         }
     }
-
 }

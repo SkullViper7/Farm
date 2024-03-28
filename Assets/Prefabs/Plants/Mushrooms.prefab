@@ -475,6 +475,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mushrooms
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a14eb234cce584246b7e9563552cf6ba,
+        type: 3}
+      propertyPath: m_TagString
+      value: Mushroom
+      objectReference: {fileID: 0}
     - target: {fileID: 7269175069737675730, guid: a14eb234cce584246b7e9563552cf6ba,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -497,10 +502,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3511400147174451406}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a14eb234cce584246b7e9563552cf6ba,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5846377711835898181}
   m_SourcePrefab: {fileID: 100100000, guid: a14eb234cce584246b7e9563552cf6ba, type: 3}
 --- !u!4 &2450935969885438231 stripped
 Transform:
@@ -529,19 +530,3 @@ MonoBehaviour:
   _slider: {fileID: 2020824559453000151}
   _sliderObject: {fileID: 2791786222291084215}
   _growthTime: 1
---- !u!114 &5846377711835898181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2974814384797227949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ad3d4005fa6e44ab4d47ff3efa249c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Price: 0
-  Value: 0
-  ItemData: {fileID: 11400000, guid: b8f1dad58f3532e489a0412be3b87c2c, type: 2}
-  Tag: 

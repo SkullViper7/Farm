@@ -12,6 +12,7 @@ TagManager:
   - InventorySlot
   - Mushroom
   - Canabis
+  - StoreSlot
   layers:
   - Default
   - TransparentFX

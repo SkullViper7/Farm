@@ -21,6 +21,8 @@ public class Item : MonoBehaviour
 
     public string Tag;
 
+    public int ID;
+
     private void Start()
     {
         _sprite = GetComponent<Image>();
@@ -32,11 +34,12 @@ public class Item : MonoBehaviour
         Price = ItemData.Price;
         Value = ItemData.Value;
 
-        if (gameObject.tag == "InventorySlot" || gameObject.tag == "Canabis" || gameObject.tag == "Mushroom")
-        {
-            _sprite.sprite = _icon;
-            _text.text = _name;
-            Tag = gameObject.tag;
-        }
+        ID = Random.Range(0, 10000);
+
+        _sprite.sprite = _icon;
+        _text.text = _name;
+        Tag = gameObject.tag;
+
+        GetComponent<Button>().onClick.AddListener(delegate{ItemInteract.Instance.Click(gameObject);});
     }
 }
