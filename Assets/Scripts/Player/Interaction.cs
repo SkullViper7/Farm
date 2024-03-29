@@ -177,9 +177,9 @@ public class Interaction : MonoBehaviour
             }
 
             else if (interactable.CompareTag("Door"))
-                StartCoroutine(_tpScript.TeleportToWarehouse()); // Teleport to warehouse
+                _tpScript.TeleportToWarehouse(); // Teleport to warehouse
             else if (interactable.CompareTag("Scooter"))
-                StartCoroutine(_tpScript.TeleportToAppart()); // Teleport to appartment
+                _tpScript.TeleportToAppart(); // Teleport to appartment
         }
     }
 
