@@ -115,12 +115,12 @@ public class Interaction : MonoBehaviour
 
             if (Hit.transform.tag == "Grabbable")
             {
-                if (Hit.transform.GetChild(0).tag == "Canabis")
+                if (Hit.transform.GetChild(1).tag == "Canabis")
                 {
                     _inventoryScript.AddItem(_canabisSO, 1);
                 }
 
-                if (Hit.transform.GetChild(0).tag == "Mushroom")
+                if (Hit.transform.GetChild(1).tag == "Mushroom")
                 {
                     _inventoryScript.AddItem(_mushroomSO, 1);
                 }

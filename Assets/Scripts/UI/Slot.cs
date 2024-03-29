@@ -63,5 +63,6 @@ public class Slot : MonoBehaviour
         _plantScript = GetComponentInChildren<Plant>();
         _plantScript.ShowGrewItem();
         gameObject.tag = "Grabbable";
+        Unlock();
     }
 }

@@ -47,7 +47,7 @@ public class ItemInteract : MonoBehaviour
             _plantationScript.PlantItem(item);
         }
 
-        if (IsSelling)
+        if (IsSelling && item.Name == "Canabis" || item.Name == "Mushroom")
         {
             _sellingScript.ShowContextBox(item);
         }
