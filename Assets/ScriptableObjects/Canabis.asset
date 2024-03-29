@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Canabis
   m_EditorClassIdentifier: 
   Name: Canabis
-  Icon: {fileID: 21300000, guid: e5951b623b38f724aba1617011e59074, type: 3}
+  Icon: {fileID: 21300000, guid: 513b9e574f984204bbe960a464c53db4, type: 3}
   Price: 0
   Value: 10

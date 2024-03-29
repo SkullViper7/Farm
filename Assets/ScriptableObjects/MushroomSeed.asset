@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MushroomSeed
   m_EditorClassIdentifier: 
   Name: Mushroom Seed
-  Icon: {fileID: 21300000, guid: dd1ac8e8c9b73bd4c93f97c2773b7116, type: 3}
+  Icon: {fileID: 21300000, guid: 99a7ac253256cdb4ebc642aedefe8a1d, type: 3}
   Price: 2
   Value: 4
