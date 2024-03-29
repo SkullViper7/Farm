@@ -9,30 +9,28 @@ public class Plantation : MonoBehaviour
     [SerializeField] GameObject _canabis;
     [SerializeField] GameObject _mushroom;
 
-    [SerializeField] List<Button> _slots;
-
     Interaction _interactionScript;
 
+    InventoryUI _inventoryUIScript;
     Inventory _inventoryScript;
 
     private void Awake()
     {
         _interactionScript = GetComponent<Interaction>();
+        _inventoryUIScript = GetComponent<InventoryUI>();
         _inventoryScript = GetComponent<Inventory>();
     }
 
-    public void PlantItem(GameObject item)
+    public void PlantItem(ItemSO item)
     {
-        Debug.Log($"planted {item.GetComponent<Item>().ID}");
-
         Transform plantTransform = _interactionScript.Hit.transform;
 
         GameObject newPlant;
-        if (item.GetComponent<Item>().ItemData.Name == "Canabis Seed")
+        if (item.Name == "Canabis Seed")
         {
             newPlant = Instantiate(_canabis, plantTransform.position - new Vector3(0, 0.5f, 0), Quaternion.identity);
         }
-        else if (item.GetComponent<Item>().ItemData.Name == "Mushroom Seed")
+        else if (item.Name == "Mushroom Seed")
         {
             newPlant = Instantiate(_mushroom, plantTransform.position - new Vector3(0, 0.5f, 0), Quaternion.identity);
         }
@@ -44,7 +42,7 @@ public class Plantation : MonoBehaviour
 
         newPlant.transform.SetParent(plantTransform);
 
-        _inventoryScript.CloseInventory();
+        _inventoryUIScript.CloseInventory();
         _interactionScript.Hit.transform.GetComponent<Slot>().Lock();
 
         _inventoryScript.RemoveItem(item, 1);   

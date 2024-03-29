@@ -473,7 +473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 0}
+  _inventoryUIScript: {fileID: 0}
 --- !u!1 &124491442 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8996466573157414768, guid: 444024b1927f3e44da2a559a3e367462,
@@ -1594,7 +1594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 0}
+  _inventoryUIScript: {fileID: 0}
 --- !u!1001 &335511777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2110,7 +2110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 0}
+  _inventoryUIScript: {fileID: 0}
 --- !u!4 &458734569 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 444024b1927f3e44da2a559a3e367462,
@@ -6085,7 +6085,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+  sharedProfile: {fileID: 11400000, guid: e25bc14717513cd41bc99f7cc2341889, type: 2}
 --- !u!4 &832575519
 Transform:
   m_ObjectHideFlags: 0
@@ -6286,7 +6286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 0}
+  _inventoryUIScript: {fileID: 0}
 --- !u!1 &936437916
 GameObject:
   m_ObjectHideFlags: 0
@@ -9362,7 +9362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 0}
+  _inventoryUIScript: {fileID: 0}
 --- !u!1 &1476761199
 GameObject:
   m_ObjectHideFlags: 0
@@ -9552,7 +9552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 0}
+  _inventoryUIScript: {fileID: 0}
 --- !u!1 &1536606331 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4681358201806144751, guid: 444024b1927f3e44da2a559a3e367462,

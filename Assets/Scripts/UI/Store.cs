@@ -25,8 +25,9 @@ public class Store : MonoBehaviour
     [SerializeField] ItemSO _mushroomSO;
 
     [SerializeField] TMP_Text _amount;
+
     int _amountInt = 1;
-    GameObject _tempItem;
+    ItemSO _tempItem;
 
     void Start()
     {
@@ -37,12 +38,12 @@ public class Store : MonoBehaviour
         mushroom.GetComponent<Item>().ItemData = _mushroomSO;
     }
 
-    public void ItemChoose(GameObject item)
+    public void ItemChoose(ItemSO item)
     {
         _amountInt = 1;
         _amount.text = _amountInt.ToString();
         _contextBox.SetActive(true);
-        _price.text = item.GetComponent<Item>().Price.ToString();
+        _price.text = item.Price.ToString();
         _moneyText.text = _inventoryScript.Money.ToString();
         _tempItem = item;
     }
@@ -73,6 +74,7 @@ public class Store : MonoBehaviour
         {
             _inventoryScript.Money -= int.Parse(_price.text);
             _contextBox.SetActive(false);
+
             _inventoryScript.AddItem(_tempItem, _amountInt);
         }
 
@@ -85,6 +87,5 @@ public class Store : MonoBehaviour
         {
             _noMoneyError.SetActive(true);
         }
-        Debug.Log($"bought {_inventoryScript.Items[0].GetComponent<Item>().ID}");
     }
 }

@@ -15,7 +15,7 @@ public class Selling : MonoBehaviour
     [SerializeField] TMP_Text _value;
     int _amountInt = 1;
 
-    GameObject _tempItem;
+    ItemSO _tempItem;
 
     private void Awake()
     {
@@ -37,19 +37,19 @@ public class Selling : MonoBehaviour
         }
     }
 
-    public void ShowContextBox(GameObject item)
+    public void ShowContextBox(ItemSO item)
     {
         _contextBox.SetActive(true);
         _amountInt = 1;
         _amount.text = _amountInt.ToString();
-        _value.text = item.GetComponent<Item>().Value.ToString();
+        _value.text = item.Value.ToString();
         _tempItem = item;
     }
 
     public void SellItem()
     {
         _inventoryScript.RemoveItem(_tempItem, _amountInt);
-        _inventoryScript.Money += _tempItem.GetComponent<Item>().Value;
+        _inventoryScript.Money += _tempItem.Value;
         _contextBox.SetActive(false);
     }
 

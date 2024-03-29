@@ -25,26 +25,28 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        _sprite = GetComponent<Image>();
-        _text = GetComponentInChildren<TMP_Text>();
-
-        _name = ItemData.Name;
-        gameObject.name = _name;
-        _icon = ItemData.Icon;
-        Price = ItemData.Price;
-        Value = ItemData.Value;
-
-        if (!ItemInteract.Instance.IDCreated)
+        if (transform.parent.tag == "InventorySlot" || transform.parent.tag == "StoreSlot")
         {
-            ID = Random.Range(0, 10000);
-            ItemInteract.Instance.IDCreated = true;
+            _sprite = GetComponent<Image>();
+            _text = GetComponentInChildren<TMP_Text>();
+
+            _name = ItemData.Name;
+            gameObject.name = _name;
+            _icon = ItemData.Icon;
+            Price = ItemData.Price;
+            Value = ItemData.Value;
+
+            if (!ItemInteract.Instance.IDCreated)
+            {
+                ID = Random.Range(0, 10000);
+                ItemInteract.Instance.IDCreated = true;
+            }
+
+            _sprite.sprite = _icon;
+            _text.text = _name;
+            Tag = gameObject.tag;
+
+            GetComponent<Button>().onClick.AddListener(delegate{ItemInteract.Instance.Click(ItemData);});
         }
-
-        _sprite.sprite = _icon;
-        _text.text = _name;
-        Tag = gameObject.tag;
-
-        GetComponent<Button>().onClick.AddListener(delegate{ItemInteract.Instance.Click(gameObject);});
-        Debug.Log($"instantiated {ID}");
     }
 }

@@ -26,6 +26,8 @@ public class Interaction : MonoBehaviour
     StarterAssetsInputs _starterAssetsInputs;
     TP _tpScript;
     Inventory _inventoryScript;
+    InventoryUI _inventoryUIScript;
+
     [SerializeField] GameObject _itemPrefab;
     [SerializeField] ItemSO _canabisSO;
     [SerializeField] ItemSO _mushroomSO;
@@ -40,6 +42,7 @@ public class Interaction : MonoBehaviour
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         _inventoryScript = GetComponent<Inventory>();
+        _inventoryUIScript = GetComponent<InventoryUI>();
         _tpScript = GetComponent<TP>();
     }
 
@@ -83,29 +86,27 @@ public class Interaction : MonoBehaviour
 
                 // Disable player input and lock cursor
                 _starterAssetsInputs.IsLocked = true;
+                ItemInteract.Instance.IsBuying = true;
             }
 
             if (Hit.transform.tag == "Plantation")
             {
                 Cursor.lockState = CursorLockMode.None;
-                _inventoryScript.OpenInventory();
+                _inventoryUIScript.OpenInventory();
                 _starterAssetsInputs.IsLocked = true;
                 ItemInteract.Instance.IsPlanting = true;
             }
 
             if (Hit.transform.tag == "Grabbable")
             {
-                GameObject item = Instantiate(_itemPrefab, _inventoryScript.GetFirstAvailableSlot().transform);
-                _inventoryScript.AddItem(item, 1);
-
                 if (Hit.transform.GetChild(0).tag == "Canabis")
                 {
-                    item.GetComponent<Item>().ItemData = _canabisSO;
+                    _inventoryScript.AddItem(_canabisSO, 1);
                 }
 
                 if (Hit.transform.GetChild(0).tag == "Mushroom")
                 {
-                    item.GetComponent<Item>().ItemData = _mushroomSO;
+                    _inventoryScript.AddItem(_mushroomSO, 1);
                 }
 
                 Hit.transform.GetComponent<Slot>().Unlock();
@@ -115,7 +116,7 @@ public class Interaction : MonoBehaviour
 
             if (Hit.transform.tag == "Selling")
             {
-                _inventoryScript.OpenInventory();
+                _inventoryUIScript.OpenInventory();
                 Cursor.lockState = CursorLockMode.None;
                 _starterAssetsInputs.IsLocked = true;
                 ItemInteract.Instance.IsSelling = true;
@@ -139,5 +140,6 @@ public class Interaction : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _starterAssetsInputs.IsLocked = false;
         _mainUI.SetActive(true);
+        ItemInteract.Instance.IsBuying = false;
     }
 }

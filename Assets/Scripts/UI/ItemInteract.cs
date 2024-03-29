@@ -33,20 +33,21 @@ public class ItemInteract : MonoBehaviour
     public bool IsPlanting;
     public bool IsSelling;
 
-    public void Click(GameObject item)
+    public bool IsBuying;
+
+    public void Click(ItemSO item)
     {
-        if (item.transform.parent.tag == "StoreSlot")
+        if (IsBuying)
         {
             _storeScript.ItemChoose(item);
         }
 
-        if (item.transform.parent.tag == "InventorySlot" && IsPlanting)
+        if (IsPlanting)
         {
-            Debug.Log($"clicked {_inventoryScript.Items[0].GetComponent<Item>().ID}");
             _plantationScript.PlantItem(item);
         }
 
-        if (item.transform.parent.tag == "InventorySlot" && IsSelling)
+        if (IsSelling)
         {
             _sellingScript.ShowContextBox(item);
         }

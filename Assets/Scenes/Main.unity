@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 429025537}
+  _inventoryUIScript: {fileID: 429025552}
 --- !u!1 &120504370
 GameObject:
   m_ObjectHideFlags: 0
@@ -3829,7 +3829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 429025537}
+  _inventoryUIScript: {fileID: 429025552}
 --- !u!1 &258280529
 GameObject:
   m_ObjectHideFlags: 0
@@ -4390,8 +4390,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 429025537}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+      - m_Target: {fileID: 429025552}
+        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
         m_MethodName: CloseInventory
         m_Mode: 1
         m_Arguments:
@@ -5567,6 +5567,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370987201}
   m_CullTransparentMesh: 1
+--- !u!1 &371989700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 371989701}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &371989701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371989700}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 429025551}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &374234351
 GameObject:
   m_ObjectHideFlags: 0
@@ -5869,7 +5900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 429025537}
+  _inventoryUIScript: {fileID: 429025552}
 --- !u!1 &429025522 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
@@ -5941,18 +5972,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5180420229e5cb845a65fa2f2c15bac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Items: []
-  _inventory: {fileID: 600159360}
-  _pauseMenu: {fileID: 1391076071}
+  ItemList: []
   SlotList:
   - {fileID: 2121246277}
   - {fileID: 1488243967}
+  _inventory: {fileID: 371989701}
   _itemPrefab: {fileID: 4607871595881019282, guid: 38eb55a5016e41e4fbc9d176a5f1c0ce,
     type: 3}
+  _storeScript: {fileID: 1438921004}
   AvailableSlots: 6
   Money: 10
-  _moneyText: {fileID: 1928628550}
-  IsOpen: 0
 --- !u!114 &429025543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5969,13 +5998,6 @@ MonoBehaviour:
     type: 3}
   _mushroom: {fileID: 2974814384797227949, guid: 3392f79f1fc58d84b9a38fa68bed8a9d,
     type: 3}
-  _slots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &429025544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6006,6 +6028,30 @@ MonoBehaviour:
   _warehouse: {fileID: 129222692}
   _appart: {fileID: 392029243}
   _black: {fileID: 464909233}
+--- !u!4 &429025551 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+    type: 3}
+  m_PrefabInstance: {fileID: 1598750015}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &429025552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429025522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57460aadb72cced408af5316f89fe1aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventory: {fileID: 600159360}
+  _pauseMenu: {fileID: 1391076071}
+  _moneyText: {fileID: 1928628550}
+  _itemPrefab: {fileID: 4607871595881019282, guid: 38eb55a5016e41e4fbc9d176a5f1c0ce,
+    type: 3}
+  IsOpen: 0
 --- !u!1 &432912502
 GameObject:
   m_ObjectHideFlags: 0
@@ -14214,7 +14260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 709301233}
   m_Layer: 5
-  m_Name: Items
+  m_Name: Slots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15319,7 +15365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 429025537}
+  _inventoryUIScript: {fileID: 429025552}
 --- !u!1001 &885479119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16535,6 +16581,7 @@ MonoBehaviour:
   IDCreated: 0
   IsPlanting: 0
   IsSelling: 0
+  IsBuying: 0
 --- !u!4 &1026223261
 Transform:
   m_ObjectHideFlags: 0
@@ -23967,7 +24014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 429025537}
+  _inventoryUIScript: {fileID: 429025552}
 --- !u!1 &1438920999
 GameObject:
   m_ObjectHideFlags: 0
@@ -24103,6 +24150,7 @@ MonoBehaviour:
   _canabisSO: {fileID: 11400000, guid: 1a8cea8cb1ed5ff4f8a3db10ee91481d, type: 2}
   _mushroomSO: {fileID: 11400000, guid: b8f1dad58f3532e489a0412be3b87c2c, type: 2}
   _amount: {fileID: 1176142191}
+  TempItem: {fileID: 0}
 --- !u!1 &1473961089
 GameObject:
   m_ObjectHideFlags: 0
@@ -24410,7 +24458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
-  _inventoryScript: {fileID: 429025537}
+  _inventoryUIScript: {fileID: 429025552}
 --- !u!1 &1512225268
 GameObject:
   m_ObjectHideFlags: 0
@@ -25748,6 +25796,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 371989701}
     - targetCorrespondingSourceObject: {fileID: 4135013735270702856, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
       insertIndex: -1
@@ -25781,6 +25833,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 429025550}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 429025552}
   m_SourcePrefab: {fileID: 100100000, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
 --- !u!1 &1602289254
 GameObject:
