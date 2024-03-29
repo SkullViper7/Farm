@@ -101,10 +101,32 @@ public class InventoryUI : MonoBehaviour
         _inventory.SetActive(false);
     }
 
+    public void RemoveFromUI(ItemSO item)
+    {
+        for (int i = 0; i < _slotList.Count; i++)
+        {
+            if (_slotList[i].transform.childCount != 0)
+            {
+                TMP_Text text = _slotList[i].transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+
+                if (int.Parse(text.text) == 1)
+                {
+                    Destroy(_slotList[i].transform.GetChild(0).gameObject);
+                    break;
+                }
+                else
+                {
+                    text.text = (int.Parse(text.text) - 1).ToString();
+                }
+            }
+        }
+
+        UpdateInventory();
+    }
+
     public void UpdateInventory()
     {
         _items = new List<ItemSO>(_inventoryScript.ItemList);
-
 
         _items = _items.GroupBy(x => x.Name).Select(x => x.ToList()).Select(x => x.First()).ToList();
 

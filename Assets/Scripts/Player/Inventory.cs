@@ -49,6 +49,6 @@ public class Inventory : MonoBehaviour
                 ItemList.RemoveAt(index);
         }
 
-        _inventoryUIScript.UpdateInventory();
+        _inventoryUIScript.RemoveFromUI(item);
     }
 }
