@@ -67,13 +67,6 @@ public class Store : MonoBehaviour
         _contextBox.SetActive(false);
     }
 
-    public void CloseStore()
-    {
-        _starterAssetsInputs.IsLocked = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        gameObject.SetActive(false);
-    }
-
     public void BuyItem()
     {
         if (_amountInt <= _inventoryScript.AvailableSlots && _inventoryScript.Money >= int.Parse(_price.text))

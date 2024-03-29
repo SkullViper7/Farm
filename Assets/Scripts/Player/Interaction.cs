@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,6 +27,12 @@ public class Interaction : MonoBehaviour
     [SerializeField] GameObject _itemPrefab;
     [SerializeField] ItemSO _canabisSO;
     [SerializeField] ItemSO _mushroomSO;
+
+    [SerializeField] GameObject _mainUI;
+
+    [Header("Cams")]
+    [SerializeField] CinemachineVirtualCamera _mainCam;
+    [SerializeField] CinemachineVirtualCamera _storeCam;
 
     private void Awake()
     {
@@ -54,7 +61,10 @@ public class Interaction : MonoBehaviour
             {
                 // Unlock cursor and open the store
                 Cursor.lockState = CursorLockMode.None;
-                _store.SetActive(true);
+                _storeCam.Priority = 10;
+                _mainCam.Priority = 0;
+
+                _mainUI.SetActive(false);
 
                 // Disable player input and lock cursor
                 _starterAssetsInputs.IsLocked = true;
@@ -105,5 +115,14 @@ public class Interaction : MonoBehaviour
                 StartCoroutine(_tpScript.TeleportToAppart());
             }
         }
+    }
+
+    public void CloseStore()
+    {
+        _storeCam.Priority = 0;
+        _mainCam.Priority = 10;
+        Cursor.lockState = CursorLockMode.Locked;
+        _starterAssetsInputs.IsLocked = false;
+        _mainUI.SetActive(true);
     }
 }
