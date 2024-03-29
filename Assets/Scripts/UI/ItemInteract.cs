@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemInteract : MonoBehaviour
@@ -35,21 +33,29 @@ public class ItemInteract : MonoBehaviour
 
     public bool IsBuying;
 
+    /// <summary>
+    /// Handles the player's click on an item
+    /// </summary>
+    /// <param name="item">The item being clicked</param>
     public void Click(ItemSO item)
     {
+        // If the player is buying from the store, choose the item to buy
         if (IsBuying)
         {
             _storeScript.ItemChoose(item);
         }
 
-        if (IsPlanting)
+        // If the player is planting, plant the item
+        else if (IsPlanting)
         {
             _plantationScript.PlantItem(item);
         }
 
-        if (IsSelling && item.Name == "Canabis" || item.Name == "Mushroom")
+        // If the player is selling and the item is a canabis or mushroom, show the selling context box
+        else if (IsSelling && (item.Name == "Canabis" || item.Name == "Mushroom"))
         {
             _sellingScript.ShowContextBox(item);
         }
     }
+
 }
