@@ -6,24 +6,28 @@ public class TP : MonoBehaviour
     [SerializeField] Transform warehouse, appart;
     [SerializeField] GameObject black;
 
+    [SerializeField] AudioSource _audioSource;
+
     /// <summary>
     /// Teleports the player to the warehouse.
     /// </summary>
-    public void TeleportToWarehouse() => Teleport(warehouse);
+    public void TeleportToWarehouse() => Teleport(warehouse, true);
 
     /// <summary>
     /// Teleports the player to the apartment.
     /// </summary>
-    public void TeleportToAppart() => Teleport(appart);
+    public void TeleportToAppart() => Teleport(appart, false);
 
     /// <summary>
     /// Teleports the player to the given destination.
     /// </summary>
     /// <param name="destination">The destination transform to teleport to.</param>
-    void Teleport(Transform destination)
+    void Teleport(Transform destination, bool isAudioActive)
     {
         // Activate black screen to fade out
         black.SetActive(true);
+
+        _audioSource.enabled = isAudioActive;
 
         // Start coroutine to wait and teleport
         StartCoroutine(WaitAndTeleport(destination));
