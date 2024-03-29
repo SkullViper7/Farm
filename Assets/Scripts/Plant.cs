@@ -31,7 +31,7 @@ public class Plant : MonoBehaviour
     {
         if (gameObject.tag == "Mushroom")
         {
-            transform.localScale = new Vector3(0.03f, 0.03f, 0.3f); // Small size for mushroom plants
+            transform.localScale = new Vector3(0.03f, 0.03f, 0.03f); // Small size for mushroom plants
         }
         else
         {

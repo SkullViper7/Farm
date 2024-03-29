@@ -137,7 +137,7 @@ RectTransform:
   m_GameObject: {fileID: 4535576550154384462}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.547382, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6351735668627722900}
@@ -498,4 +498,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2100000, guid: be146603d775d454fa2defe628963e12, type: 2}
   _locked: {fileID: 2100000, guid: 2f6bf086a920aa447a71040eded359b6, type: 2}
+  _slider: {fileID: 0}
+  _sliderObject: {fileID: 0}
   _inventoryUIScript: {fileID: 0}
