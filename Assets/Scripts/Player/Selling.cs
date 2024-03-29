@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class Selling : MonoBehaviour
 {
-    [SerializeField] List<Button> _slots;
     [SerializeField] GameObject _contextBox;
 
     Inventory _inventoryScript;
