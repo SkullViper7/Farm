@@ -25,10 +25,13 @@ public class InventoryUI : MonoBehaviour
 
     int _amount;
 
+    Animator _animator;
+
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         _inventoryScript = GetComponent<Inventory>();
+        _animator = _inventory.GetComponent<Animator>();
     }
 
 
@@ -55,9 +58,6 @@ public class InventoryUI : MonoBehaviour
         // Show the cursor
         Cursor.lockState = CursorLockMode.None;
 
-        // Update the money text on the inventory
-        _moneyText.text = _inventoryScript.Money.ToString();
-
         IsOpen = true;
     }
 
@@ -72,12 +72,18 @@ public class InventoryUI : MonoBehaviour
 
     public void CloseInventory()
     {
-        _inventory.SetActive(false);
         _starterAssetsInputs.IsLocked = false;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
 
         IsOpen = false;
+        _animator.Play("DropPhone");
+        Invoke("DisableInventory", 0.5f);
+    }
+
+    void DisableInventory()
+    {
+        _inventory.SetActive(false);
     }
 
 
@@ -123,10 +129,13 @@ public class InventoryUI : MonoBehaviour
                 newItem.transform.GetChild(1).GetComponent<TMP_Text>().text = _amount.ToString();
             }
         }
+
+        // Update the money text on the inventory
+        _moneyText.text = _inventoryScript.Money.ToString();
     }
 
 
-    public GameObject GetFirstAvailableSlot()
+    GameObject GetFirstAvailableSlot()
     {
         for (int i = 0; i < _slotList.Count; i++)
         {

@@ -5,30 +5,25 @@ using UnityEngine.UI;
 
 public class Plant : MonoBehaviour
 {
-    [SerializeField] Slider _slider;
-    [SerializeField] GameObject _sliderObject;
-    [SerializeField] float _growthTime;
+    [SerializeField] int _growthTime;
 
     Slot _slotScript;
 
     void Start()
     {
         _slotScript = GetComponentInParent<Slot>();
-        _slider.value = 0;
-        StartCoroutine(Grow());
+        StartCoroutine(_slotScript.Grow(_growthTime));
     }
 
-    IEnumerator Grow()
+    public void ShowGrewItem()
     {
-        float increment = 0.1f/_growthTime;
-        while(_slider.value < 1)
+        if (gameObject.tag == "Mushroom")
         {
-            _slider.value += increment * Time.deltaTime;
-            yield return null;
+            transform.localScale = new Vector3(0.03f, 0.03f, 0.3f);
         }
-
-        _slotScript.Unlock();
-        _sliderObject.SetActive(false);
-        _slotScript.gameObject.tag = "Grabbable";
+        else
+        {
+            transform.localScale = new Vector3(50, 50, 50);
+        }
     }
 }

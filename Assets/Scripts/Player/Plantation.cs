@@ -28,11 +28,11 @@ public class Plantation : MonoBehaviour
         GameObject newPlant;
         if (item.Name == "Canabis Seed")
         {
-            newPlant = Instantiate(_canabis, plantTransform.position - new Vector3(0, 0.5f, 0), Quaternion.identity);
+            newPlant = Instantiate(_canabis, plantTransform.position - new Vector3(0, 0.2f, 0), Quaternion.identity);
         }
         else if (item.Name == "Mushroom Seed")
         {
-            newPlant = Instantiate(_mushroom, plantTransform.position - new Vector3(0, 0.5f, 0), Quaternion.identity);
+            newPlant = Instantiate(_mushroom, plantTransform.position - new Vector3(0, 0.2f, 0), Quaternion.identity);
         }
         else
         {

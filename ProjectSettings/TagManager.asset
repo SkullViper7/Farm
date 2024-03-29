@@ -15,6 +15,7 @@ TagManager:
   - StoreSlot
   - Door
   - Scooter
+  - Slider
   layers:
   - Default
   - TransparentFX
