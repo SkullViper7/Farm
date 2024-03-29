@@ -5,6 +5,8 @@ using StarterAssets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Interaction : MonoBehaviour
 {
@@ -38,12 +40,24 @@ public class Interaction : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera _mainCam;
     [SerializeField] CinemachineVirtualCamera _storeCam;
 
+    DepthOfField _dof;
+    [SerializeField] Volume _volume;
+
     private void Awake()
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         _inventoryScript = GetComponent<Inventory>();
         _inventoryUIScript = GetComponent<InventoryUI>();
         _tpScript = GetComponent<TP>();
+    }
+
+    private void Start()
+    {
+        DepthOfField _tempDof;
+        if (_volume.profile.TryGet<DepthOfField>(out _tempDof))
+        {
+            _dof = _tempDof;
+        }
     }
 
     void FixedUpdate()
@@ -87,6 +101,8 @@ public class Interaction : MonoBehaviour
                 // Disable player input and lock cursor
                 _starterAssetsInputs.IsLocked = true;
                 ItemInteract.Instance.IsBuying = true;
+
+                Invoke("SetDOF", 0.5f);
             }
 
             if (Hit.transform.tag == "Plantation")
@@ -133,6 +149,11 @@ public class Interaction : MonoBehaviour
         }
     }
 
+    void SetDOF()
+    {
+        _dof.focalLength.value = 55;
+    }
+
     public void CloseStore()
     {
         _storeCam.Priority = 0;
@@ -141,5 +162,6 @@ public class Interaction : MonoBehaviour
         _starterAssetsInputs.IsLocked = false;
         _mainUI.SetActive(true);
         ItemInteract.Instance.IsBuying = false;
+        _dof.focalLength.value = 0;
     }
 }
