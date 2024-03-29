@@ -21,6 +21,7 @@ public class Interaction : MonoBehaviour
     public RaycastHit Hit;
 
     StarterAssetsInputs _starterAssetsInputs;
+    TP _tpScript;
     Inventory _inventoryScript;
     [SerializeField] GameObject _itemPrefab;
     [SerializeField] ItemSO _canabisSO;
@@ -30,6 +31,7 @@ public class Interaction : MonoBehaviour
     {
         _starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         _inventoryScript = GetComponent<Inventory>();
+        _tpScript = GetComponent<TP>();
     }
 
     void FixedUpdate()
@@ -92,6 +94,15 @@ public class Interaction : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 _starterAssetsInputs.IsLocked = true;
                 ItemInteract.Instance.IsSelling = true;
+            }
+
+            if (Hit.transform.tag == "Door")
+            {
+                StartCoroutine(_tpScript.TeleportToWarehouse());
+            }
+            if (Hit.transform.tag == "Scooter")
+            {
+                StartCoroutine(_tpScript.TeleportToAppart());
             }
         }
     }

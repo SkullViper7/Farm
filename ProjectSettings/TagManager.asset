@@ -13,6 +13,8 @@ TagManager:
   - Mushroom
   - Canabis
   - StoreSlot
+  - Door
+  - Scooter
   layers:
   - Default
   - TransparentFX
