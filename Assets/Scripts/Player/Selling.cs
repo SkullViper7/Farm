@@ -52,7 +52,6 @@ public class Selling : MonoBehaviour
         _inventoryScript.RemoveItem(_tempItem, _amountInt);
         _inventoryScript.Money += _tempItem.GetComponent<Item>().Value;
         _contextBox.SetActive(false);
-        _inventoryScript.UpdateInventory();
     }
 
     public void CancelSell()

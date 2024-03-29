@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using StarterAssets;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,7 @@ public class Interaction : MonoBehaviour
     [SerializeField] float _interactDistance = 10f;
 
     [SerializeField] GameObject _interactText;
+    [SerializeField] TMP_Text _interactTextTMP;
     [SerializeField] Camera _cam;
 
     [Header("Interactables")]
@@ -45,6 +47,19 @@ public class Interaction : MonoBehaviour
     {
         CanInteract = Physics.Raycast(_cam.transform.position, _cam.transform.forward, out Hit, _interactDistance, _interactableLayer);
         _interactText.SetActive(CanInteract);
+
+        if (CanInteract)
+        {
+            switch (Hit.transform.tag)
+            {
+                case "Store": _interactTextTMP.text = "Buy"; break;
+                case "Plantation": _interactTextTMP.text = "Plant"; break;
+                case "Grabbable": _interactTextTMP.text = "Pickup"; break;
+                case "Selling" : _interactTextTMP.text = "Sell"; break;
+                case "Door": _interactTextTMP.text = "Go to selling location"; break;
+                case "Scooter": _interactTextTMP.text = "Go back home"; break;
+            }
+        }
     }
 
     /// <summary>
