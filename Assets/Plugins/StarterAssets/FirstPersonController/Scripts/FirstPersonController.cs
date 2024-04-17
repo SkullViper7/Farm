@@ -108,6 +108,8 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+			Cursor.lockState = CursorLockMode.Locked;
 		}
 
 		private void Update()
